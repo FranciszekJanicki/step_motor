@@ -185,11 +185,12 @@ step_motor_err_t step_motor_reset(step_motor_t* motor)
 {
     assert(motor);
 
-    motor->state.frequency = 0UL;
-    motor->state.step_count = 0L;
-    motor->state.direction = STEP_MOTOR_DIRECTION_STOP;
+    step_motor_err_t err = step_motor_set_direction(motor, STEP_MOTOR_DIRECTION_STOP);
+    err |= step_motor_set_frequency(motor, 0UL);
 
-    return step_motor_set_direction(motor, motor->state.direction);
+    motor->state.step_count = 0L;
+
+    return err;
 }
 
 void step_motor_update_step_count(step_motor_t* motor)
