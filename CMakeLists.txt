@@ -4,10 +4,8 @@ target_sources(step_motor PRIVATE
     step_motor.c
 )
 
-target_include_directories(step_motor PRIVATE 
-)
-
-target_link_libraries(step_motor PRIVATE
+target_include_directories(step_motor PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_compile_options(step_motor PUBLIC
