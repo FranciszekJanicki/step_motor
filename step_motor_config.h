@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef float float32_t;
 
 typedef enum {
@@ -42,5 +46,9 @@ typedef struct {
     step_motor_err_t (*device_set_frequency)(void*, uint32_t);
     step_motor_err_t (*device_set_direction)(void*, step_motor_direction_t);
 } step_motor_interface_t;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // STEP_MOTOR_STEP_MOTOR_CONFIG_H

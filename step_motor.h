@@ -4,6 +4,10 @@
 #include "step_motor_config.h"
 #include <stdbool.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
     step_motor_config_t config;
     step_motor_interface_t interface;
@@ -32,5 +36,9 @@ float32_t step_motor_get_position(step_motor_t* motor);
 float32_t step_motor_get_speed(step_motor_t* motor, float32_t delta_time);
 float32_t step_motor_get_acceleration(step_motor_t* motor,
                                       float32_t delta_time);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // STEP_MOTOR_STEP_MOTOR_H
