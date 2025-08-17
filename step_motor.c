@@ -138,17 +138,14 @@ static inline float32_t step_motor_wrap_position(step_motor_t const* motor,
                                                  float32_t position)
 {
     float32_t position_range =
-        fabsf(motor->config.max_position - motor->config.min_position);
+        motor->config.max_position - motor->config.min_position;
 
-    position = fmodf(position, position_range);
-    while (position < motor->config.min_position) {
+    position = fmodf(position - motor->config.min_position, position_range);
+    if (position < 0.0F) {
         position += position_range;
     }
-    if (position >= motor->config.max_position) {
-        position -= position_range;
-    }
 
-    return position;
+    return position + motor->config.min_position;
 }
 
 static inline int64_t step_motor_position_to_step_count(
@@ -159,8 +156,11 @@ static inline int64_t step_motor_position_to_step_count(
         return 0L;
     }
 
-    float32_t step_count =
-        step_motor_wrap_position(motor,position) / motor->config.step_change;
+    if (motor->config.should_wrap_position) {
+        position = step_motor_wrap_position(motor, position);
+    }
+
+    float32_t step_count = position / motor->config.step_change;
 
     return (int64_t)roundf(step_count);
 }
@@ -175,7 +175,11 @@ static inline float32_t step_motor_step_count_to_position(
 
     float32_t position = (float32_t)step_count * motor->config.step_change;
 
-    return step_motor_wrap_position(motor,position);
+    if (motor->config.should_wrap_position) {
+        position = step_motor_wrap_position(motor, position);
+    }
+
+    return position;
 }
 
 step_motor_err_t step_motor_initialize(step_motor_t* motor,

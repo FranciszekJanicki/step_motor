@@ -37,7 +37,7 @@ typedef struct {
     float32_t min_acceleration;
     float32_t max_acceleration;
     float32_t step_change;
-    bool is_periodic;
+    bool should_wrap_position;
 } step_motor_config_t;
 
 typedef struct {
