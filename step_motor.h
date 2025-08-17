@@ -22,7 +22,7 @@ step_motor_err_t step_motor_deinitialize(step_motor_t* motor);
 
 step_motor_err_t step_motor_reset(step_motor_t* motor);
 
-void step_motor_update_step_count(step_motor_t* motor);
+step_motor_err_t step_motor_update_step_count(step_motor_t* motor);
 
 step_motor_err_t step_motor_set_position(step_motor_t* motor,
                                          float32_t position,
@@ -32,10 +32,14 @@ step_motor_err_t step_motor_set_acceleration(step_motor_t* motor,
                                              float32_t acceleration,
                                              float32_t delta_time);
 
-float32_t step_motor_get_position(step_motor_t* motor);
-float32_t step_motor_get_speed(step_motor_t* motor, float32_t delta_time);
-float32_t step_motor_get_acceleration(step_motor_t* motor,
+step_motor_err_t step_motor_get_position(step_motor_t* motor,
+                                         float32_t* position);
+step_motor_err_t step_motor_get_speed(step_motor_t* motor,
+                                      float32_t* speed,
                                       float32_t delta_time);
+step_motor_err_t step_motor_get_acceleration(step_motor_t* motor,
+                                             float32_t* acceleration,
+                                             float32_t delta_time);
 
 #ifdef __cplusplus
 }

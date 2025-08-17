@@ -11,8 +11,8 @@ typedef float float32_t;
 
 typedef enum {
     STEP_MOTOR_ERR_OK = 0,
-    STEP_MOTOR_ERR_FAIL = 1 << 0,
-    STEP_MOTOR_ERR_NULL = 1 << 1,
+    STEP_MOTOR_ERR_FAIL,
+    STEP_MOTOR_ERR_NULL,
 } step_motor_err_t;
 
 typedef enum {
@@ -37,6 +37,7 @@ typedef struct {
     float32_t min_acceleration;
     float32_t max_acceleration;
     float32_t step_change;
+    bool is_periodic;
 } step_motor_config_t;
 
 typedef struct {
