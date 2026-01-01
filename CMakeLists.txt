@@ -4,6 +4,10 @@ target_sources(step_motor PRIVATE
     step_motor.c
 )
 
+target_link_libraries(step_motor PRIVATE
+    m
+)
+
 target_include_directories(step_motor PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
